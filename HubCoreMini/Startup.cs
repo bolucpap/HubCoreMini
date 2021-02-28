@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HubCoreMini.Providers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -33,6 +34,11 @@ namespace HubCoreMini
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.AddScoped<IInfoQueryProvider, TalkBackInfoQueryProvider>();
+            services.AddScoped<IInfoProviderRepository, MockProviderRepository>();
+            services.AddScoped<IEventHandlerProvider, TalkBackEventTriggerProvider>();
+            services.AddScoped<IEventSubscriptionRepository, MockSubscriptionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
